@@ -1,0 +1,59 @@
+Test 1:
+onCreate() calls: 1
+onStart() calls: 1
+onResume() calls: 1
+onRestart() calls: 0
+
+Because when a new instance of activity is started, they will execute for onCreate() then onStart() finally onResume().
+
+Test 2:
+onCreate() calls: 1
+onStart() calls: 2
+onResume() calls: 2
+onRestart() calls: 1
+
+When the screen went off, the activity went to the onStop() state and continues execution in the background. Finally when the screen wakes up, the activity was immediately navigated back as it is the first item on the activity stack.
+
+Test 3:
+onCreate() calls: 1
+onStart() calls: 3
+onResume() calls: 3
+onRestart() calls: 0
+
+Each time when the screen was rotated, the activity will be destroyed first and create a new copy of the activity. However we tells Android to keep the counters as the savedInstanceState before destroying the activity, which is why the old counters value remains and gets incremented.
+
+Test 4:
+onCreate() calls: 1
+onStart() calls: 1
+onResume() calls: 1
+onRestart() calls: 0
+
+Because when the 'Start Activity Two" was pressed, it creates a new instance of ActivityTwo.
+
+Test 5:
+onCreate() calls: 1
+onStart() calls: 3
+onResume() calls: 3
+onRestart() calls: 0
+
+Same behaviour as Test Case 3.
+
+Test 6:
+onCreate() calls: 1
+onStart() calls: 2
+onResume() calls: 2
+onRestart() calls: 1
+
+Because when the 'Start Activity Two" was pressed, ActivityOne went invisible to the user but continues its execution in the background. However when the "Close Activity" button was pressed in ActivityTwo, ActivityTwo was popped out from the activity stack, and ActivityOne became the top item in the activity stack and hence being navigated back.
+
+Test 7:
+onCreate() calls: 1
+onStart() calls: 1
+onResume() calls: 1
+onRestart() calls: 0
+
+Because each time 'Close Activity" was pressed in ActivityTwo, ActivityTwo went invisible to the user then goes to the 'finish' state, finally it will then being destroyed. Hence this will result in the next time Activity Two is to be started, a new instance of ActivityTwo will be created and started.
+
+
+
+
